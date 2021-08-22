@@ -1,9 +1,9 @@
 import React from "react";
+import Signxx from "./pages/Signxx";
+
 
 const App = () => (
-  <div>
-    <h1>hello, world!</h1>
-  </div>
+  <Signxx />
 )
 
 export default App;
