@@ -3,7 +3,7 @@ import firebaseApp from "../firebase/core";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
-const Signin = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [info, setInfo] = useState("");
@@ -21,7 +21,7 @@ const Signin = () => {
       const auth = getAuth(firebaseApp);
       signInWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
-          console.log(userCredential)
+          console.log(userCredential);
         })
         .catch(error => {
           setInfo(error.message);
@@ -61,4 +61,4 @@ const Signin = () => {
   )
 }
 
-export default Signin;
+export default Login;

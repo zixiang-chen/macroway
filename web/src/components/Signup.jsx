@@ -8,7 +8,7 @@ const check = (email, password, confirmPwd) => {
     throw new Error("unconsistent passwords");
   }
   if (password.length < 8) {
-    throw new Error("password must contain more 8 characters");
+    throw new Error("too simple password");
   }
 }
 
@@ -49,28 +49,34 @@ const Signup = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={(e) => onSubmit(e)}>
-        <div>
+    <div className="container w-80 mx-auto bg-gray-100">
+      <form className="space-y-5"
+        onSubmit={(e) => onSubmit(e)}
+      >
+        <div className="">
           <label htmlFor="email">Email</label>
           <br />
-          <input id='email' type='email' value={email} onChange={e => onEmailChanged(e)} required />
+          <input className="w-full ring-1"
+            id='email' type='email' value={email} onChange={e => onEmailChanged(e)} required />
         </div>
-        <div>
+        <div className="">
           <label htmlFor="password">Password</label>
           <br />
-          <input id='password' type='password' value={password} onChange={e => onPasswordChanged(e)} required />
+          <input className="w-full ring-1"
+            id='password' type='password' value={password} onChange={e => onPasswordChanged(e)} required />
         </div>
-        <div>
+        <div className="">
           <label htmlFor="confirmPwd">Confirm Password</label>
           <br />
-          <input id='confirmPwd' type='password' value={confirmPwd} onChange={e => onConfirmPwdChanged(e)} required />
+          <input className="w-full ring-1"
+            id='confirmPwd' type='password' value={confirmPwd} onChange={e => onConfirmPwdChanged(e)} required
+          />
         </div>
-        <div>
+        <div className="text-red-500">
           <p>{info}</p>
         </div>
-        <div>
-          <button>Sign Up</button>
+        <div className="text-center text-white">
+          <button className="bg-indigo-300 w-2/5">Sign Up</button>
         </div>
       </form>
     </div>
