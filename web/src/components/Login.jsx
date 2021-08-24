@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import firebaseApp from "../firebase/core";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/core";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 
 const Login = () => {
@@ -18,7 +18,6 @@ const Login = () => {
     e.preventDefault();
     // 
     try {
-      const auth = getAuth(firebaseApp);
       signInWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
           console.log(userCredential);

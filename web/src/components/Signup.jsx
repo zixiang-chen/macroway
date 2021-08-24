@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import firebaseApp from "../firebase/core";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/core";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 
 const check = (email, password, confirmPwd) => {
@@ -32,7 +32,6 @@ const Signup = () => {
     // 
     try {
       check(email, password, confirmPwd);
-      const auth = getAuth(firebaseApp);
       createUserWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
           const { uid } = userCredential.user;

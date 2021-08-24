@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import firebaseApp from "../firebase/core";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Editor from "./Editor";
+import { auth } from "../firebase/core";
+import { onAuthStateChanged } from "firebase/auth";
 
 
 const UserIcon = () => {
   const [logined, setLogined] = useState(false)
   useEffect(() => {
     // check login state
-    const auth = getAuth(firebaseApp);
     const authStateObserver = onAuthStateChanged(auth, (user) => {
       if (user) {
         setLogined(true);
@@ -32,7 +30,6 @@ const UserIcon = () => {
             </svg>
           </button>
         </div>
-        <Editor />
       </div>
     ) : (
       <div>

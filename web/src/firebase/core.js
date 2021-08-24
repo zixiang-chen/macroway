@@ -1,5 +1,7 @@
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -12,8 +14,9 @@ const firebaseConfig = {
   appId: "1:632562566547:web:7c10d3e04b07b6f2dd1466",
   measurementId: "G-E5Z2FXQ10P"
 };
-
 const firebaseApp = initializeApp(firebaseConfig);
 
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
 
-export default firebaseApp;
+export { auth, db };

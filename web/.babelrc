@@ -1,1 +1,5 @@
-{}
+{
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ]
+}
