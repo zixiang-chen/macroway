@@ -17,18 +17,13 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     // 
-    try {
-      signInWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
-          console.log(userCredential);
-        })
-        .catch(error => {
-          setInfo(error.message);
-        })
-      //
-    } catch (error) {
-      setInfo(error.message);
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        console.log(userCredential);
+      })
+      .catch(error => {
+        setInfo(error.message);
+      });
     //
   }
 

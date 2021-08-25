@@ -5,6 +5,11 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.jsx'),
+  resolve: {
+    fallback: {
+      assert: require.resolve('assert'),
+    },
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
   },
