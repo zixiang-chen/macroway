@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/articles'>Articles</Link>
-          </li>
-        </ul>
+    <div className="">
+      <nav className="">
+        <div className="">
+          <Link to='/'>Home</Link>
+        </div>
+        <div className="">
+          <Link to='/articles'>Articles</Link>
+        </div>
+        <div className="">
+          <UserIcon />
+        </div>
       </nav>
-      <UserIcon />
     </div>
   )
 }

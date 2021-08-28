@@ -33,7 +33,7 @@ const Article = () => {
         <p>loading...</p>
       </div>
     ) : (
-      <div>
+      <div className="">
         <article className="prose">
           <ReactMarkdown>{content}</ReactMarkdown>
         </article>

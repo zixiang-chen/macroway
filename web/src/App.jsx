@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Home from "./pages/Home";
@@ -10,29 +10,45 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import { userContext } from "./util";
+import { auth } from "./firebase/core";
+import { onAuthStateChanged } from "firebase/auth";
 
 
-const App = () => (
-  <Router>
-    <Header />
-    <Switch>
-      <Route path="/signup">
-        <Signup />
-      </Route>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/articles">
-        <ArticleList />
-      </Route>
-      <Route path={"/article/:articleid"}>
-        <Article />
-      </Route>
-      <Route path="/">
-        <Home />
-      </Route>
-    </Switch>
-  </Router>
-)
+const App = () => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const authStateObserver = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    // cleanup: unsubscribe
+    return authStateObserver;
+  }, []);
+
+  return (
+    <userContext.Provider value={user}>
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/signup">
+            <Signup />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/articles">
+            <ArticleList />
+          </Route>
+          <Route path={"/article/:articleid"}>
+            <Article />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </userContext.Provider>
+  );
+}
 
 export default App;

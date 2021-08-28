@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { auth } from "../firebase/core";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 
 const check = (email, password, confirmPwd) => {
@@ -13,37 +13,28 @@ const check = (email, password, confirmPwd) => {
 }
 
 const Signup = () => {
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
   const [info, setInfo] = useState("");
   //
-  const onPasswordChanged = (e) => {
-    setPassword(e.target.value);
-  }
-  const onEmailChanged = (e) => {
-    setEmail(e.target.value);
-  }
-  const onConfirmPwdChanged = (e) => {
-    setConfirmPwd(e.target.value);
-  }
   const onSubmit = (e) => {
     e.preventDefault();
     // 
-    try {
-      check(email, password, confirmPwd);
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
-          const { uid } = userCredential.user;
-          setInfo(uid);
-        })
-        .catch(error => {
-          const { message } = error;
-          setInfo(message);
-        })
-    } catch (error) {
-      setInfo(error.message);
-    }
+    check(email, password, confirmPwd);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        const { user } = userCredential;
+        return updateProfile(user, { displayName });
+      })
+      .then(() => {
+        setInfo("Successful Registered");
+      })
+      .catch(error => {
+        const { message } = error;
+        setInfo(message);
+      });
     //
   }
 
@@ -53,22 +44,32 @@ const Signup = () => {
         onSubmit={(e) => onSubmit(e)}
       >
         <div className="">
+          <label htmlFor="displayName">Display Name</label>
+          <br />
+          <input className="w-full ring-1"
+            id='displayName' type='text' value={displayName} placeholder="optional"
+            onChange={e => { setDisplayName(e.target.value); }} required />
+        </div>
+        <div className="">
           <label htmlFor="email">Email</label>
           <br />
           <input className="w-full ring-1"
-            id='email' type='email' value={email} onChange={e => onEmailChanged(e)} required />
+            id='email' type='email' value={email}
+            onChange={e => { setEmail(e.target.value); }} required />
         </div>
         <div className="">
           <label htmlFor="password">Password</label>
           <br />
           <input className="w-full ring-1"
-            id='password' type='password' value={password} onChange={e => onPasswordChanged(e)} required />
+            id='password' type='password' value={password}
+            onChange={e => { setPassword(e.target.value); }} required />
         </div>
         <div className="">
           <label htmlFor="confirmPwd">Confirm Password</label>
           <br />
           <input className="w-full ring-1"
-            id='confirmPwd' type='password' value={confirmPwd} onChange={e => onConfirmPwdChanged(e)} required
+            id='confirmPwd' type='password' value={confirmPwd}
+            onChange={e => { setConfirmPwd(e.target.value); }} required
           />
         </div>
         <div className="text-red-500">

@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { auth } from "../firebase/core";
-import { onAuthStateChanged } from "firebase/auth";
+import { userContext } from "../util";
 
 
 const UserIcon = () => {
-  const [logined, setLogined] = useState(false)
-  useEffect(() => {
-    // check login state
-    const authStateObserver = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setLogined(true);
-      } else {
-        // nothing
-      }
-    });
-    // cleanup: unsubscribe
-    return authStateObserver;
-  });
+  const userObj = useContext(userContext);
   // 
 
   return (
-    logined ? (
+    (userObj !== null) ? (
       <div>
         <div>
           <button>
