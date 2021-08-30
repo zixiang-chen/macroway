@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { auth } from "../firebase/core";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 const Login = () => {
+  const history = useHistory();
+  //
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [info, setInfo] = useState("");
@@ -20,7 +22,8 @@ const Login = () => {
     // 
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
-        console.log(userCredential);
+        // console.log(userCredential);
+        history.replace({ pathname: '/' });
       })
       .catch(error => {
         setInfo(error.message);
@@ -52,9 +55,6 @@ const Login = () => {
           </button>
         </div>
       </form>
-      <div>
-        <Link to="/signup">Sign Up</Link>
-      </div>
     </div>
   )
 }

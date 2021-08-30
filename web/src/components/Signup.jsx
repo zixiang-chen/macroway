@@ -39,44 +39,44 @@ const Signup = () => {
   }
 
   return (
-    <div className="container w-80 mx-auto bg-gray-100">
-      <form className="space-y-5"
+    <div>
+      <form
         onSubmit={(e) => onSubmit(e)}
       >
-        <div className="">
+        <div>
           <label htmlFor="displayName">Display Name</label>
           <br />
-          <input className="w-full ring-1"
+          <input
             id='displayName' type='text' value={displayName} placeholder="optional"
             onChange={e => { setDisplayName(e.target.value); }} required />
         </div>
-        <div className="">
+        <div>
           <label htmlFor="email">Email</label>
           <br />
-          <input className="w-full ring-1"
+          <input
             id='email' type='email' value={email}
             onChange={e => { setEmail(e.target.value); }} required />
         </div>
-        <div className="">
+        <div>
           <label htmlFor="password">Password</label>
           <br />
-          <input className="w-full ring-1"
+          <input
             id='password' type='password' value={password}
             onChange={e => { setPassword(e.target.value); }} required />
         </div>
-        <div className="">
+        <div>
           <label htmlFor="confirmPwd">Confirm Password</label>
           <br />
-          <input className="w-full ring-1"
+          <input
             id='confirmPwd' type='password' value={confirmPwd}
             onChange={e => { setConfirmPwd(e.target.value); }} required
           />
         </div>
-        <div className="text-red-500">
+        <div>
           <p>{info}</p>
         </div>
-        <div className="text-center text-white">
-          <button className="bg-indigo-300 w-2/5">Sign Up</button>
+        <div>
+          <button>Sign Up</button>
         </div>
       </form>
     </div>

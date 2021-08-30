@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Article from "./components/Article";
 import ArticleList from "./pages/ArticleList";
 import Header from "./components/Header";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 import {
   BrowserRouter as Router,
   Switch,
@@ -30,11 +32,11 @@ const App = () => {
       <Router>
         <Header />
         <Switch>
-          <Route path="/signup">
-            <Signup />
+          <Route path="/profile">
+            <Profile />
           </Route>
-          <Route path="/login">
-            <Login />
+          <Route path="/settings">
+            <Settings />
           </Route>
           <Route path="/articles">
             <ArticleList />

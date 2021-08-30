@@ -13,7 +13,7 @@ const Home = () => {
   }
   // 
   return (
-    <div className="w-4/5 mx-auto p-4">
+    <div className="w-2/3 mx-auto p-4">
       {
         editable ? (
           <Editor userId={userObj.uid} />
