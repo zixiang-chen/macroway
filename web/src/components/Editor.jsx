@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { CONTENT_TYPE } from "../util";
 
 
-const Editor = ({ userId }) => {
+const Editor = ({ userId, onCancel }) => {
   const [title, setTitle] = useState("");
   const [markdown, setMarkdown] = useState("");
   const [type, setType] = useState(CONTENT_TYPE.POST)
@@ -42,7 +42,7 @@ const Editor = ({ userId }) => {
         createdAt: Timestamp.now(),
         authorId: userId
       });
-      setNotisf(`Successful posted an article with id=${docRef.id}`);
+      onCancel();
     } catch (err) {
       setNotisf(`${err.message}`);
     }
@@ -88,12 +88,17 @@ const Editor = ({ userId }) => {
         )
       }
 
-      <div className="flex justify-end bg-gray-50">
-        <button className="w-28 mx-2 border-2" type="button" onClick={e => { setPreview(!preview); }}>Preview</button>
-        <button className="w-28 mx-2 border-2" type="button" onClick={e => { onSave(e) }}>Save</button>
-        <button className="w-28 mx-2 border-2 bg-green-500 text-white" type="button" onClick={e => { onPublish(e) }}>Publish</button>
+      <div className="flex justify-between">
+        <div>
+          <button className="w-28 border-2" type="button" onClick={onCancel}>Cancel</button>
+        </div>
+        <div className="bg-gray-50">
+          <button className="w-28 mx-2 border-2" type="button" onClick={e => { setPreview(!preview); }}>Preview</button>
+          <button className="w-28 mx-2 border-2" type="button" onClick={e => { onSave(e) }}>Save</button>
+          <button className="w-28 mx-2 border-2 bg-green-500 text-white" type="button" onClick={e => { onPublish(e) }}>Publish</button>
+        </div>
       </div>
-    </div>
+    </div >
   );
 }
 

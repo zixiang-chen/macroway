@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
 import Home from "./pages/Home";
 import Article from "./components/Article";
 import ArticleList from "./pages/ArticleList";

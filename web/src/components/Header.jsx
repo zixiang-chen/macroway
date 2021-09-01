@@ -3,7 +3,7 @@ import UserIcon from "./UserIcon";
 import { Link } from "react-router-dom";
 import { userContext } from "../util";
 import UserMenu from "./UserMenu";
-import Login from "./Login";
+import SignUI from "./SignUI";
 
 
 const Header = () => {
@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <div className="w-full bg-gray-200">
-      <nav className="w-2/3 mx-auto flex justify-between">
+      <nav className="w-2/3 mx-auto text-2xl flex justify-between">
         <div>
           <Link to='/'>Home</Link>
         </div>
@@ -26,12 +26,12 @@ const Header = () => {
         ) : (
           <div className="w-2/3 mx-auto">
             <div className="relative">
-              <div className="w-30 absolute right-0 leading-8 my-1">
+              <div className="w-30 absolute right-0 leading-8 my-1 bg-gray-50">
                 {
                   (userObj != null) ? (
                     <UserMenu />
                   ) : (
-                    <Login />
+                    <SignUI isUp={false} />
                   )
                 }
               </div>

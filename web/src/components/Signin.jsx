@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { auth } from "../firebase/core";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Link, useHistory } from "react-router-dom";
 
 
-const Login = () => {
-  const history = useHistory();
+const Signin = () => {
   //
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +21,6 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         // console.log(userCredential);
-        history.replace({ pathname: '/' });
       })
       .catch(error => {
         setInfo(error.message);
@@ -32,26 +29,30 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className="w-full">
       <form onSubmit={(e) => onSubmit(e)}>
-        <div>
+        <div className="my-4">
           <label htmlFor="email">Email</label>
           <br />
           <input className="border"
-            id='email' type='email' value={email} onChange={e => onEmailChanged(e)} required
+            id='email' type='email' value={email} required
+            onChange={e => onEmailChanged(e)}
           />
         </div>
-        <div>
+        <div className="my-4">
           <label htmlFor="password">Password</label>
           <br />
-          <input id='password' type='password' value={password} onChange={e => onPasswordChanged(e)} required />
+          <input className="border"
+            id='password' type='password' value={password} required
+            onChange={e => onPasswordChanged(e)}
+          />
         </div>
-        <div>
-          <p>{info}</p>
+        <div className="bg-red-400">
+          <p className="text-white">{info}</p>
         </div>
-        <div>
-          <button className="bg-red-500">
-            Log In
+        <div className="my-4 text-right">
+          <button type="submit">
+            Sign In
           </button>
         </div>
       </form>
@@ -59,4 +60,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default Signin;
