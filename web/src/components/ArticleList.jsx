@@ -8,7 +8,7 @@ import { LOCAL_ARTICLES } from "../util";
 
 
 const ArticleList = () => {
-  const [articles, setArticles] = useState(LOCAL_ARTICLES);
+  const [articles, setArticles] = useState([]);
   useEffect(() => {
     const fetchArticles = async () => {
       let docs = [];
@@ -19,7 +19,7 @@ const ArticleList = () => {
       });
       setArticles(docs);
     }
-    // fetchArticles();
+    fetchArticles();
   }, []);
 
   return (
@@ -28,7 +28,7 @@ const ArticleList = () => {
         {
           articles.map(article => (
             <li key={article.id}>
-              <div className="w-full mx-8 pt-12">
+              <div className="w-full mx-auto pb-12">
                 {
                   (article.type == CONTENT_TYPE.POST) ? (
                     <PostCard post={article} />

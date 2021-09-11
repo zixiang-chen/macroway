@@ -11,10 +11,12 @@ const Header = () => {
   const userObj = useContext(userContext);
 
   return (
-    <div className="w-full bg-gray-200">
-      <nav className="w-2/3 mx-auto text-2xl flex justify-between">
+    <div className="w-full bg-indigo-200">
+      <nav className="w-3/4 mx-auto text-2xl flex justify-between">
         <div>
           <Link to='/'>Home</Link>
+          <Link className="ml-8" to='/profile'>About</Link>
+          <Link className="ml-8" to='/projects'>Projects</Link>
         </div>
         <div onClick={e => { setHidden(!hidden); }}>
           <UserIcon signined={userObj == null ? false : true} />
@@ -24,9 +26,9 @@ const Header = () => {
         hidden ? (
           null
         ) : (
-          <div className="w-2/3 mx-auto">
+          <div className="w-3/4 mx-auto">
             <div className="relative">
-              <div className="w-30 absolute right-0 leading-8 my-1 bg-gray-50">
+              <div className="w-30 absolute right-0 leading-8 my-1 bg-indigo-50">
                 {
                   (userObj != null) ? (
                     <UserMenu />

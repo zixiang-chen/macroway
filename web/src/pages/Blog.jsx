@@ -1,32 +1,17 @@
-import React, { useState, useContext } from "react";
-import { userContext } from "../util";
-import Editor from "../components/Editor";
+import React from "react";
 import ArticleList from "../components/ArticleList";
+import Bulletin from "../components/Bulletin";
 
 
 const Blog = () => {
-  const userObj = useContext(userContext);
-  const [editable, setEditable] = useState(false);
-  const toggleEditor = e => {
-    setEditable(!editable);
-  }
-
   return (
-    <div>
-      <div>
-        {
-          (userObj != null) ? (
-            editable ? (
-              <Editor userId={userObj.uid} onCancel={toggleEditor} />
-            ) : (
-              <button onClick={e => { toggleEditor(e) }} > Create</button>
-            )
-          ) : (null)
-        }
-      </div>
-      <main>
+    <div className="flex justify-between">
+      <main className="w-8/12 mr-4">
         <ArticleList />
       </main>
+      <aside className="w-4/12 ml-4">
+        <Bulletin />
+      </aside>
     </div>
   );
 }

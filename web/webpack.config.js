@@ -16,7 +16,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(css)$/,
         exclude: /node_modules/,
         use: [
           {
@@ -30,8 +30,8 @@ module.exports = {
           },
           {
             loader: 'postcss-loader'
-          }
-        ],
+          },
+        ]
       },
       {
         test: /\.(js|jsx)$/,

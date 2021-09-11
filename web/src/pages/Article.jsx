@@ -3,6 +3,7 @@ import { db } from "../firebase/core";
 import { doc, getDoc } from "firebase/firestore";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 
 const Article = () => {
@@ -10,35 +11,38 @@ const Article = () => {
   const { articleid } = useParams();
   // 
   const [loading, setLoading] = useState(true);
-  const [content, setContent] = useState("");
+  const [atc, setAtc] = useState(null);
   useEffect(() => {
     const fetchContent = async () => {
       const docRef = doc(db, 'articles', articleid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
+        setAtc(docSnap.data());
         setLoading(false);
-        setContent(docSnap.data().content);
       }
       else {
-        setLoading(false);
-        setContent("No such document");
+        // setLoading(false);
+        console.log("No such article");
       }
     };
     fetchContent();
   }, []);
 
   return (
-    loading ? (
-      <div>
-        <p>loading...</p>
-      </div>
-    ) : (
-      <div className="">
-        <article className="prose">
-          <ReactMarkdown>{content}</ReactMarkdown>
-        </article>
-      </div>
-    )
+    <div>
+      {
+        loading ? (
+          <div>
+            <Spinner />
+          </div>
+        ) : (
+          <article className="prose max-w-none">
+            <h1 className="text-center">{atc.title}</h1>
+            <ReactMarkdown>{atc.content}</ReactMarkdown>
+          </article>
+        )
+      }
+    </div>
   );
 }
 

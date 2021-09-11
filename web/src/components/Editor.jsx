@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { db } from "../firebase/core";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import ReactMarkdown from "react-markdown";
 import { CONTENT_TYPE } from "../util";
+import { userContext } from "../util";
 
 
-const Editor = ({ userId, onCancel }) => {
+const Editor = () => {
+  const userObj = useContext(userContext);
   const [title, setTitle] = useState("");
   const [markdown, setMarkdown] = useState("");
   const [type, setType] = useState(CONTENT_TYPE.POST)
@@ -40,9 +42,9 @@ const Editor = ({ userId, onCancel }) => {
         content: markdown,
         type: type,
         createdAt: Timestamp.now(),
-        authorId: userId
+        authorId: userObj.uid
       });
-      onCancel();
+      setNotisf(`Successful Published a Article with id=${docRef.id}`);
     } catch (err) {
       setNotisf(`${err.message}`);
     }
@@ -64,7 +66,7 @@ const Editor = ({ userId, onCancel }) => {
       </div>
       {
         preview ? (
-          <div className="prose">
+          <div className="prose max-w-none">
             <ReactMarkdown>{markdown}</ReactMarkdown>
           </div>
         ) : (
@@ -87,18 +89,16 @@ const Editor = ({ userId, onCancel }) => {
           </form>
         )
       }
-
-      <div className="flex justify-between">
+      <div className="flex justify-between bg-gray-50">
         <div>
-          <button className="w-28 border-2" type="button" onClick={onCancel}>Cancel</button>
         </div>
-        <div className="bg-gray-50">
+        <div>
           <button className="w-28 mx-2 border-2" type="button" onClick={e => { setPreview(!preview); }}>Preview</button>
           <button className="w-28 mx-2 border-2" type="button" onClick={e => { onSave(e) }}>Save</button>
           <button className="w-28 mx-2 border-2 bg-green-500 text-white" type="button" onClick={e => { onPublish(e) }}>Publish</button>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

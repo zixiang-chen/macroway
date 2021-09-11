@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Home from "./pages/Home";
-import Article from "./components/Article";
-import ArticleList from "./pages/ArticleList";
+import Article from "./pages/Article";
 import Header from "./components/Header";
+import Editor from "./components/Editor";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import {
@@ -29,24 +29,29 @@ const App = () => {
     <userContext.Provider value={user}>
       <Router>
         <Header />
-        <Switch>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/settings">
-            <Settings />
-          </Route>
-          <Route path="/articles">
-            <ArticleList />
-          </Route>
-          <Route path={"/article/:articleid"}>
-            <Article />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+        <div className="w-full my-8">
+          <div className="w-3/4 mx-auto">
+            <Switch>
+              <Route path="/new">
+                <Editor />
+              </Route>
+              <Route path="/profile">
+                <Profile />
+              </Route>
+              <Route path="/settings">
+                <Settings />
+              </Route>
+              <Route path={"/article/:articleid"}>
+                <Article />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </div>
+        </div>
       </Router>
+
     </userContext.Provider>
   );
 }
