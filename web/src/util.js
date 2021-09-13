@@ -1,13 +1,9 @@
 import { createContext } from "react";
 
 
-export const CONTENT_TYPE = {
-  POST: "POST",
-  ARTICLE: "ARTICLE"
-}
-
 export const userContext = createContext(null);
 
+/*
 export const LOCAL_ARTICLES = [
   {
     "authorId": "iObJaDHLwXaj9PzVzHdGspwO3Cq2",
@@ -87,3 +83,10 @@ export const LOCAL_ARTICLES = [
     "id": "b3UVLUqZip9NBnqrdVcl"
   }
 ];
+*/
+
+const DEFAULT_EDTOR_CONFIGURATION = {
+  title: true,
+  save: true,
+  preview: true
+}

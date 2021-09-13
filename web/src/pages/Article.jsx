@@ -1,45 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../firebase/core";
-import { doc, getDoc } from "firebase/firestore";
-import ReactMarkdown from "react-markdown";
+import { fetchArticle } from "../firebase/apis";
 import { useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import ArticleViewer from "../components/ArticleViewer";
+import { useHistory } from "react-router-dom";
+import { deleteArticle } from "../firebase/apis";
 
 
 const Article = () => {
-  // 
   const { articleid } = useParams();
   // 
   const [loading, setLoading] = useState(true);
-  const [atc, setAtc] = useState(null);
+  const [article, setArticle] = useState(null);
   useEffect(() => {
-    const fetchContent = async () => {
-      const docRef = doc(db, 'articles', articleid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setAtc(docSnap.data());
-        setLoading(false);
-      }
-      else {
-        // setLoading(false);
-        console.log("No such article");
-      }
-    };
-    fetchContent();
+    fetchArticle(articleid).then(data => {
+      setArticle(data);
+      setLoading(false);
+    });
   }, []);
+  // 
+  const history = useHistory();
+  const onDelete = () => {
+    deleteArticle(articleid)
+      .then(value => {
+        history.push('/');
+      });
+  }
 
   return (
     <div>
       {
         loading ? (
-          <div>
-            <Spinner />
-          </div>
+          <Spinner />
         ) : (
-          <article className="prose max-w-none">
-            <h1 className="text-center">{atc.title}</h1>
-            <ReactMarkdown>{atc.content}</ReactMarkdown>
-          </article>
+          <div>
+            <ArticleViewer article={article} />
+            <div className='text-right'>
+              <button onClick={onDelete}>delete</button>
+            </div>
+          </div>
         )
       }
     </div>

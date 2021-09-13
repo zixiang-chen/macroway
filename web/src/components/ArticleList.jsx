@@ -4,7 +4,6 @@ import { db } from "../firebase/core";
 import { CONTENT_TYPE } from "../util";
 import PostCard from "./PostCard";
 import ArticleCard from "./ArticleCard";
-import { LOCAL_ARTICLES } from "../util";
 
 
 const ArticleList = () => {
@@ -30,10 +29,10 @@ const ArticleList = () => {
             <li key={article.id}>
               <div className="w-full mx-auto pb-12">
                 {
-                  (article.type == CONTENT_TYPE.POST) ? (
-                    <PostCard post={article} />
-                  ) : (
+                  (article.title) ? (
                     <ArticleCard article={article} />
+                  ) : (
+                    <PostCard post={article} />
                   )
                 }
               </div>

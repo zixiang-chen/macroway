@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Home from "./pages/Home";
 import Article from "./pages/Article";
 import Header from "./components/Header";
-import Editor from "./components/Editor";
+import New from "./pages/New";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import {
@@ -33,7 +33,7 @@ const App = () => {
           <div className="w-3/4 mx-auto">
             <Switch>
               <Route path="/new">
-                <Editor />
+                <New />
               </Route>
               <Route path="/profile">
                 <Profile />

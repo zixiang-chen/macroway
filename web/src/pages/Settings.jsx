@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 
 const Settings = () => {
-  const [value, setValue] = useState("Hello, World!")
+  const [selected, setSelected] = useState("");
 
   return (
     <div className="flex justify-between">
@@ -10,7 +11,7 @@ const Settings = () => {
         <div>
           <h2 className='border-b-2 leading-8 font-bold'>Content</h2>
           <ul>
-            <li>Profile</li>
+            <li>Bulletin</li>
           </ul>
         </div>
         <div>
@@ -21,6 +22,7 @@ const Settings = () => {
         </div>
       </aside>
       <main className="w-9/12">
+
       </main>
     </div>
   )
